@@ -18,14 +18,22 @@ Dar exemplos
 
 ### 🔧 Instalação
 
-Uma série de exemplos passo-a-passo que informam o que você deve executar para ter um ambiente de desenvolvimento em execução.
+Para execução do projeto é necessario os seguintes passos para ter o ambiente de desenvolvimento em execução.
 
-Diga como essa etapa será:
+Faça:
 
 ```
 virtualenv .env
 ```
 source .env/bin/activate
+```
+
+```
+pip install -r requirements.txt
+```
+
+```
+Para Instalação de dependências de forma manual siga os passos abaixo:
 ```
 
 ```
@@ -61,7 +69,7 @@ Adicione notas adicionais sobre como implantar isso em um sistema ativo
 Mencione as ferramentas que você usou para criar seu projeto
 
 * [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - O framework web usado
-* [Maven](https://maven.apache.org/) - Gerente de Dependência
+* $ pip freeze > requirements.txt - Gerente de Dependência
 * [ROME](https://rometools.github.io/rome/) - Usada para gerar RSS
 
 ## 🖇️ Colaborando
