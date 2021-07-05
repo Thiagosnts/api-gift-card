@@ -1,6 +1,6 @@
 # API-GiftCard
 
-API criada para um trabalho da disciplina de Projeto de software, em resumo ela exemplificar um CRUD de giftcard, alem disso, e possivel simular o resgaste de giftcard, contando tambem com um frontend.
+API criada para um trabalho da disciplina de Projeto de software, em resumo ela exemplifica um CRUD de giftcard, alem disso, e possivel simular o resgaste de giftcard, contando tambem com um frontend.
 
 ## 🚀 Começando
 
