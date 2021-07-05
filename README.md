@@ -23,17 +23,15 @@ Uma série de exemplos passo-a-passo que informam o que você deve executar para
 Diga como essa etapa será:
 
 ```
-Dar exemplos
+virtualenv .env
+```
+source .env/bin/activate
 ```
 
-E repita:
-
 ```
-Até finalizar
+pip install fastapi[all]
 ```
-
-Termine com um exemplo de como obter dados do sistema ou como usá-los para uma pequena demonstração.
-
+Para rodar o servidor inicie o debug.
 ## ⚙️ Executando os testes
 
 Explicar como executar os testes automatizados para este sistema.
