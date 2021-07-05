@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="pt">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="THIAGO DOS SANTOS MOURAO">
+  <meta name="generator" content="">
+  <title>Venda GiftCard</title>
+  <link rel="icon" href="favicon.png">
+  <link rel="canonical" href="https://getbootstrap.com/docs/5.0/examples/album/">
+
+
+
+  <!-- Bootstrap core CSS -->
+  <link href="../assets/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    .logo {
+      background-image: url(gift.jpg) !important;
+      background-repeat: no-repeat !important;
+      background-size: 100% !important;
+    }
+
+    .erro{color:red}
+    .sucess{color:darkblue}
+    .preco .pin{font-size: 11px;color:darkblue}
+    text{-webkit-user-select: text}
+  </style>
+
+
+</head>
+
+<body>
+
+  <header>
+    <div class="collapse bg-dark" id="navbarHeader">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-8 col-md-7 py-4">
+            <h4 class="text-white">Sobre</h4>
+            <p class="text-muted">Sistema de admistração e transmissão de venda de GiftCard.</p>
+          </div>
+          <div class="col-sm-4 offset-md-1 py-4">
+            <h4 class="text-white">Recursos</h4>
+            <ul class="list-unstyled">
+              <li><a href="#" class="text-white">Tela Inicial</a></li>
+              <li><a href="edit.html" class="text-white">Editar Catálogo</a></li>
+              <li><a href="create.html" class="text-white">Cadastrar GiftCard</a></li>
+              <!--<li><a href="#" class="text-white">Sistema</a></li>-->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navbar navbar-dark bg-dark shadow-sm">
+      <div class="container">
+        <a href="home.html" class="navbar-brand d-flex align-items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor"
+            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" aria-hidden="true" class="me-2"
+            viewBox="0 0 24 24">
+            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+            <circle cx="12" cy="13" r="4" />
+          </svg>
+          <strong>Home</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader"
+          aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="py-1 text-center container">
+      <div class="row py-lg-3">
+        <div class="col-lg-6 col-md-6 mx-auto">
+          <h1 class="fw-light">Catálogo de GiftCard</h1>
+          <p class="lead text-muted">Catalogo para compra de GiftCard Virtual.</p>
+
+        </div>
+      </div>
+    </section>
+
+    <div class="album py-2 bg-light">
+      <div class="container">
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+   
+
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <footer class="text-muted py-5">
+    <div class="container">
+      <p class="float-end mb-1">
+        <a href="#">Back to top</a>
+      </p>
+      <p class="mb-1">Sistema Vendas; Desenvolvido para trabalho Universidade Veiga de Almeida</p>
+      <p class="mb-0"><a href="/">Visite a pagina</a> ou leia <a href="https://www.uva.br/">Aproveite</a>.</p>
+    </div>
+  </footer>
+
+
+  <script src="../assets/dist/js/bootstrap.bundle.min.js"></script>
+
+
+</body>
+<script>
+
+  modelo = '<div class="col"> <div class="card shadow-sm"> <svg class="bd-placeholder-img card-img-top logo" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><text class="preco" x="50%" y="25%" fill="darkblue" dy=".3em">R$ 20.00</text></svg> <div class="card-body"> <p  class="card-text-center text-center nome">GOOGLE R$10</p><div class="justify-content-between align-items-center text-center"> <div class="btn-group"><button onclick="comprar(this)" type="button" class="buy btn btn-sm btn-outline-secondary">COMPRAR</button> </div><!--<small class="text-muted">9 mins</small>--></div></div></div></div>'
+  lista = document.getElementsByClassName('row-cols-1')[0]
+
+  var url = 'http://127.0.0.1:8000/product'
+  var resposta = document.getElementById("resposta")
+  var resp = ''
+
+  var request = new XMLHttpRequest();
+  request.open("GET", url, true);
+
+  request.send()
+
+
+
+  request.onreadystatechange = function () {//Função a ser chamada quando a requisição retornar do servidor
+    if (request.readyState == 4 && request.status != 500) {//Verifica se o retorno do servidor deu certo
+      obj = JSON.parse(request.responseText)
+      for (var item in obj) {
+       
+        adicionarItem(obj[item].id, obj[item].nome, obj[item].valor)
+      }
+
+    }
+    else if (request.readyState == 4 && request.status != 200)
+      alert("Ocorreu Algum Erro")
+
+  }
+
+  function adicionarItem(id, nome, valor) {
+    data = pegaItem()
+    data.getElementsByClassName("nome")[0].innerHTML=nome
+    data.getElementsByClassName("preco")[0].innerHTML="R$"+valor
+    data.getElementsByClassName("buy")[0].value=id
+
+    lista.append(data)
+    
+  }
+
+
+  function pegaItem() {
+    item = document.createElement("div")
+    item.innerHTML = modelo
+    return item
+
+  }
+
+
+
+
+  function comprar(id){
+    lista = document.getElementsByClassName('row-cols-1')[0]
+    
+  
+    var url = 'http://localhost:8000/product/'
+
+    var modelo='<div class="col"> <div class="card shadow-sm"> <svg class="bd-placeholder-img card-img-top logo" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Thumbnail" preserveAspectRatio="xMidYMid slice" focusable="false"> <title>Placeholder</title><text id="pin" x="50%" y="25%" fill="darkblue" dy=".3em">R$ 20.00</text> </svg> <div class="card-body"> <p  class="card-text-center text-center"><span id="mensagem" style="display: block;">##MENSAGEM##</span></p><div class="justify-content-between align-items-center text-center"> <div class="btn-group"> </div></div></div></div></div>'
+
+    var col= document.getElementsByClassName("col")[0]
+
+  
+    col.innerHTML=modelo
+  
+  
+    
+    var request = new XMLHttpRequest();
+    request.open("POST", url+id.value+'/confirm', true);
+  
+    request.setRequestHeader('Content-Type', 'application/json')
+  
+    request.send();
+  
+  
+  
+    
+    request.onreadystatechange = function () {//Função a ser chamada quando a requisição retornar do servidor
+      if (request.readyState == 4 && request.status == 200) {//Verifica se o retorno do servidor deu certo
+        var obj = JSON.parse(request.responseText)
+        a=modelo.replace('##MENSAGEM##',obj.statusOperacao)
+        col.innerHTML=a
+        document.getElementById("mensagem").className="sucess"
+        lista.innerHTML=col.innerHTML
+
+       document.getElementById('pin').innerHTML=obj.PIN
+
+  
+      }
+      else if (request.readyState == 4 && request.status == 422)
+      var obj = JSON.parse(request.responseText)
+      a=modelo.replace('##MENSAGEM##',obj.details.statusOperacao)
+      col.innerHTML=a
+      document.getElementById("mensagem").className="erro"
+      lista.innerHTML=col.innerHTML
+  
+  
+   
+    }
+  
+  }
+</script>
+
+</html>

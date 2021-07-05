@@ -1,0 +1,223 @@
+<html style="border-top: solid 50px #292961;border-bottom: solid 50px #292961;" lang="pt">
+
+<head>
+
+  <title>FrontConectCar</title>
+  <link rel="icon" href="logo.png">
+
+
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+
+
+  <meta name="theme-color" content="#7952b3">
+
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+
+    body {
+      padding-top: 0px !important;
+    }
+
+    pre {
+      overflow: visible !important;
+      font-size: 11px;
+    }
+
+    .wrapper {
+      display: grid;
+      grid-template-columns: 50% 50%;
+      height: 100%;
+    }
+
+    .center {
+      text-align: center;
+    }
+
+    .espaco {
+      padding: 15px;
+      color: red
+    }
+  </style>
+
+
+
+</head>
+
+<body>
+
+  <div class="wrapper">
+
+    <img src="https://gitlab.ipirangacloud.com/uploads/-/system/appearance/header_logo/1/IPIRANGA_LOGO.jpg" style="
+      position: absolute;
+      top: 8px;
+      width: 125px;
+      left: 8;
+          ">
+
+
+    <div style="text-align: center;border: solid 1px grey;padding:15px;box-shadow: 2px 2px 5px rgb(0 0 0 / 50%);">
+      <!-- <img class="mb-4" src="logo.png" alt="" width="72" height="57" style="
+        width: 35%;
+        height: auto;"> -->
+
+
+
+      <br>
+
+
+      <pre id="request">          "origemTransacao": "PDV",
+          "codigoPontoVenda: 48003",
+          "telefone: 21993634243",
+          "codigoCracha: 7"
+        </pre>
+
+
+      <div style="
+"><input id="tag" style="width:250px;margin:auto;display: inline;padding: 0px 0px;" class="form-control"
+          placeholder=""><i onclick="add()" class="fa fa-plus" aria-hidden="true" style="
+font-size: 19px;
+padding: 5px;
+border: solid 1px gainsboro;
+margin: 0px 0px 0px 8px;
+cursor: pointer;border-radius: 2px;
+    box-shadow: 2px 2px 3px rgb(0 0 0 / 31%);
+"></i></div>
+      <br>
+      <button onclick="ativarTag()" class=" btn btn btn-primary" type="submit">Ativar</button>
+
+      <span style="font-size:10px;color:red;display: block;margin-top: 5px;" id="token">Token Gerado !!!</span>
+
+
+    </div>
+    <div style="border: solid 1px grey;box-shadow: 2px 2px 5px rgb(0 0 0 / 50%);" id="resposta">
+      <h6 class="center espaco">StatusCode </h6>
+      <h1 class="center">Resposta</h1><br>
+      <pre>'</pre>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    var token = null
+
+    // pegarCredenciais();
+
+
+    // function pegarCredenciais() {
+
+    //   var url = "https://hmlaccounts.auth.sinapseapis.com/oauth2/token";
+    //   var credenciais = 'client_id=19rr4mua8vfc2999gvo49tuslb&client_secret=25b51dvk3l5dp6is1jnjk2425cl4felvhpnp556ef3li57befhb&grant_type=client_credentials'
+    //   var saida = document.getElementById("token")
+
+    //   var request = new XMLHttpRequest();
+    //   request.open("POST", url, true);
+    //   request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
+    //   request.send('client_id=19rr4mua8vfc2999gvo49tuslb&client_secret=25b51dvk3l5dp6is1jnjk2425cl4felvhpnp556ef3li57befhb&grant_type=client_credentials');
+
+
+    //   request.onreadystatechange = function () {//Função a ser chamada quando a requisição retornar do servidor
+    //     if (request.readyState == 4 && request.status == 200) {//Verifica se o retorno do servidor deu certo
+    //       console.log(request.responseText);
+
+    //       token = JSON.parse(request.responseText).access_token
+    //       saida.innerHTML = "Token Gerado !!!"
+    //     }
+    //     else if (request.readyState == 4 && request.status != 200)
+    //       alert('Mensagem:Houve um erro ao obter credenciais !!!')
+
+    //   }
+
+
+    //}
+
+
+
+    function ativarTag() {
+
+      var url = 'http://127.0.0.1:8000/product'
+      var resposta = document.getElementById("resposta")
+      var resp=''
+      //var tag = document.getElementById("tag").value
+
+      var request = new XMLHttpRequest();
+      request.open("GET", url, true);
+
+
+
+
+      request.send()
+
+      // request.send('{"origemTransacao": "PDV", "codigoPontoVenda": 48003, "telefone": "21993634243", "codigoCracha": "7", "produtos": [{"codigoPremiacao":"'+tag+'"}]}');
+
+
+      request.onreadystatechange = function () {//Função a ser chamada quando a requisição retornar do servidor
+        if (request.readyState == 4 && request.status != 500) {//Verifica se o retorno do servidor deu certo
+          obj = JSON.parse(request.responseText)
+
+          
+          for(var item in obj) {
+            resp=resp+'<ul><li>' + obj[item].id + '</li>'+
+            '<li>' +obj[item].nome+'</li>' +
+            '<li>' + obj[item].valor+'</li></ul>' 
+          }
+
+          resposta.innerHTML = resp 
+
+        }
+        else if (request.readyState == 4 && request.status != 200)
+
+          resposta.innerHTML = '<h1>Resposta</h1><br>Ocorreu Algum Erro'
+
+
+      }
+
+
+
+
+
+    }
+
+    function add() {
+      var valor = document.getElementById('request')
+      var tag = document.getElementById("tag").value
+
+      if (tag) {
+        a = "\"codigoPremiacao:" + tag + "\"\n"
+
+
+        valor.innerHTML = valor.innerHTML + a
+      }
+
+
+
+
+    }
+
+
+  </script>
+
+
+
+
+</body>
+
+</html>
