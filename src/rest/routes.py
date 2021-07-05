@@ -1,11 +1,13 @@
 
+from datetime import time
 from fastapi import APIRouter
 from src.rest.dto.produto_dto import Produtodto
-
-
+from datetime import datetime
+import time
 from src.domain.produtoDB import ProdutoDB
 from src.core.controle import Controle, TipoEnum
-
+from threading import Thread
+import time
 
 router = APIRouter()
 ProdutoDB().criarTabela()
@@ -66,3 +68,21 @@ def Listar_catálogo():
 def Ativar_PIN(pin: str):
     lista = Controle().fluxo(TipoEnum.activate, pin)
     return (lista)
+
+
+@router.get("/assincrono",
+             tags=["Ativar PIN..."],
+             status_code=200)
+def assincrono():
+    
+    obj1 = Thread(target=segundo_plano,args=[1.1,"Ed"])
+    # obj2 = Thread(target=func2,args=[1.2,"Paulo"])
+
+    obj1.start()
+    # obj2.start()
+
+    return "Tudo certo3"
+
+def segundo_plano(velocidade,nome):
+        time.sleep(0.7)
+        print("Pedido Autorizado !!!"+str(datetime.now()))
