@@ -16,7 +16,7 @@ ProdutoDB().criarTabela()
             tags=["Listar Produtos..."],
             status_code=200)
 def Listar_catálogo():
-    lista = Controle().fluxo(TipoEnum.listar)
+    lista = Controle().fluxo(tipo=TipoEnum.listar)
     return (lista)
 
 
@@ -25,7 +25,7 @@ def Listar_catálogo():
              status_code=200)
 def Cadastrar_GiftCard(dto: Produtodto = None):
     obj = dto.getCommand()
-    response = Controle().fluxo(TipoEnum.salvar, None, obj)
+    response = Controle().fluxo(tipo=TipoEnum.salvar, obj=obj)
     return (response)
 
 
@@ -33,7 +33,7 @@ def Cadastrar_GiftCard(dto: Produtodto = None):
                tags=[" Deletando Produtos..."],
                status_code=200)
 def Deletar_GiftCard(item_id: str):
-    response = Controle().fluxo(TipoEnum.deletar, int(item_id))
+    response = Controle().fluxo(tipo=TipoEnum.deletar, item_id=int(item_id))
     return (response)
 
 
@@ -42,7 +42,7 @@ def Deletar_GiftCard(item_id: str):
             status_code=200)
 def Atualizar_GiftCard(item_id: str, dto: Produtodto):
     obj = dto.getCommand()
-    response = Controle().fluxo(TipoEnum.atualizar, item_id, obj)
+    response = Controle().fluxo(tipo=TipoEnum.atualizar, item_id=int(item_id), obj=obj)
     return (response)
 
 
@@ -50,7 +50,7 @@ def Atualizar_GiftCard(item_id: str, dto: Produtodto):
              tags=["Obtendo PIN..."],
              status_code=200)
 def Obter_PIN(item_id: str):
-    response = Controle().fluxo(TipoEnum.gerarGift, int(item_id))
+    response = Controle().fluxo(tipo=TipoEnum.gerarGift, item_id=int(item_id))
     return (response)
 
 
@@ -58,7 +58,7 @@ def Obter_PIN(item_id: str):
             tags=["Listar PIN..."],
             status_code=200)
 def Listar_catálogo():
-    lista = Controle().fluxo(TipoEnum.listaPIN)
+    lista = Controle().fluxo(tipo=TipoEnum.listaPIN)
     return (lista)
 
 
@@ -66,23 +66,23 @@ def Listar_catálogo():
              tags=["Ativar PIN..."],
              status_code=200)
 def Ativar_PIN(pin: str):
-    lista = Controle().fluxo(TipoEnum.activate, pin)
+    lista = Controle().fluxo(TipoEnum.activate, item_id=pin)
     return (lista)
 
 
-@router.get("/assincrono",
-             tags=["Ativar PIN..."],
-             status_code=200)
-def assincrono():
-    
-    obj1 = Thread(target=segundo_plano,args=[1.1,"Ed"])
-    # obj2 = Thread(target=func2,args=[1.2,"Paulo"])
+# @router.get("/assincrono",
+#              tags=["Ativar PIN..."],
+#              status_code=200)
+# def assincrono():
 
-    obj1.start()
-    # obj2.start()
+#     obj1 = Thread(target=segundo_plano,args=[1.1,"Ed"])
+#     # obj2 = Thread(target=func2,args=[1.2,"Paulo"])
 
-    return "Tudo certo3"
+#     obj1.start()
+#     # obj2.start()
 
-def segundo_plano(velocidade,nome):
-        time.sleep(0.7)
-        print("Pedido Autorizado !!!"+str(datetime.now()))
+#     return "Tudo certo3"
+
+# def segundo_plano(velocidade,nome):
+#         time.sleep(0.7)
+#         print("Pedido Autorizado !!!"+str(datetime.now()))
